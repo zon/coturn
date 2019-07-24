@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coturn
+spec:
+  selector:
+    matchLabels:
+      app: coturn
+  template:
+    metadata:
+      labels:
+        app: coturn
+    spec:
+      hostNetwork: true
+      nodeSelector:
+        turn: "yes"
+      containers:
+      - name: coturn
+        image: zvonimir/coturn:latest
+        ports: 
+          - containerPort: 3478
+          - containerPort: 10000
+          - containerPort: 10001
+          - containerPort: 10002
+          - containerPort: 10003
+          - containerPort: 10004
+          - containerPort: 10005
+          - containerPort: 10006
+          - containerPort: 10007
+          - containerPort: 10008
+          - containerPort: 10009
+        securityContext:
+          privileged: true
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3478
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
