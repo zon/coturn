@@ -16,7 +16,8 @@ spec:
         turn: "yes"
       containers:
       - name: coturn
-        image: zvonimir/coturn:latest
+        image: gcr.io/bubbly-mission-247714/coturn
+        imagePullPolicy: Always
         ports: 
           - containerPort: 3478
           - containerPort: 10000
@@ -37,3 +38,5 @@ spec:
             port: 3478
           initialDelaySeconds: 30
           timeoutSeconds: 30
+      restartPolicy: OnFailure
+
